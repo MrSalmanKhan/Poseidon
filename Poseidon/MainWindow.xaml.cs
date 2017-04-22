@@ -37,11 +37,6 @@ namespace Poseidon
             Menu.Toggle();
         }
 
-        //private void Custom_OnClick(object sender, RoutedEventArgs e)
-        //{
-        //    CustomMenu.Toggle();
-        //}
-
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             MessageBox.Show("You Clicked Packing!");
