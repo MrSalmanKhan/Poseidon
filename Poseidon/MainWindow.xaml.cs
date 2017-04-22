@@ -39,7 +39,7 @@ namespace Poseidon
 
         private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("You Clicked Packing!");
+            
         }
 
         private void DefaultClick(object sender, RoutedEventArgs e)
