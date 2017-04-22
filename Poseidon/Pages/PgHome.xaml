@@ -1,0 +1,167 @@
+﻿<Page x:Class="Poseidon.PgHome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Poseidon"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1500"
+      Title="PgHome">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350" />
+            <RowDefinition Height="90" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
+            <Image Source="/Images/companylogo.jpg" Height="300" />
+            <Label Content="Notifications Area" FontSize="18" Foreground="Teal" HorizontalAlignment="Center" Margin="0 10" />
+        </StackPanel>
+
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Expired Products" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label Grid.Row="1" Grid.Column="1" Content="Expiring in &lt; 90 Days" FontSize="14" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <Label Grid.Row="1" Grid.Column="2" Content="ReorderLevel Reached Products" FontSize="18" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+
+        <DataGrid Grid.Row="2" Grid.Column="2" Name="dgReorderLevel" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="True"
+                   Width="421" MinHeight="380" MaxHeight="380" AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                    VerticalAlignment="Top" IsReadOnly="False" DataContext="{Binding}" HorizontalScrollBarVisibility="Visible"
+                    HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                    HorizontalGridLinesBrush="Gainsboro" HorizontalAlignment="Left" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="W No" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WarehouseNo}" FontWeight="Bold" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Quantity" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Quantity}" FontWeight="Bold" Foreground="Red" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost/Unit" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid Grid.Row="2" Grid.Column="1" Name="dgPrior90" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="True"
+                   Width="395"  MinHeight="380"  MaxHeight="380" AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
+                   EnableRowVirtualization="True" ItemsSource="{Binding}" VerticalAlignment="Top" IsReadOnly="False" DataContext="{Binding}" HorizontalScrollBarVisibility="Visible"
+                   HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                   HorizontalGridLinesBrush="Gainsboro"   HorizontalAlignment="Center" >
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn Header="W-No" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WarehouseNo}" FontWeight="Bold" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Expiry Date" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}" FontWeight="Bold" Foreground="Maroon" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost/Unit" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="2" Grid.Column="0" Name="dgExpired" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True"
+                   Width="421"  MinHeight="380" AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                    VerticalAlignment="Top" IsReadOnly="False" DataContext="{Binding}" HorizontalScrollBarVisibility="Visible"
+                    HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                    HorizontalGridLinesBrush="Gainsboro" HorizontalAlignment="Right" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn x:Name="btnDelete2">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button  Click="DgButton_Delete">
+                                <Button.Template>
+                                    <ControlTemplate>
+                                        <Image  Source="/Images/delete.png" Cursor="Hand" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ToolTip="Delete"/>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="W-No" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding WarehouseNo}" FontWeight="Bold" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Expiry Date" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}" FontWeight="Bold" Foreground="Red" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Quantity" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Quantity}" FontWeight="Bold" Foreground="Red" FontSize="14"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost/Unit" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

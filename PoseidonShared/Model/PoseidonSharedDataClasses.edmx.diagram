@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b1dcfe2818148faa29b8ae35e5497d7" Name="Diagram1">
+        <EntityTypeShape EntityType="PoseidonDBModel.Account" Width="1.5" PointX="5.75" PointY="7.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Customer" Width="1.5" PointX="0.75" PointY="8.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Medicine" Width="1.5" PointX="8" PointY="2.5" />
+        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyPurchasesValue" Width="1.5" PointX="2.75" PointY="8.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyStockValue" Width="1.5" PointX="7.75" PointY="7.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Product" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="PoseidonDBModel.SoldItem" Width="1.5" PointX="4.75" PointY="10.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Stock" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PoseidonDBModel.StockItem" Width="1.5" PointX="3" PointY="2.5" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Supplier" Width="1.5" PointX="5.75" PointY="3.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.viewProductDetail" Width="1.5" PointX="9.75" PointY="7.25" />
+        <AssociationConnector Association="PoseidonDBModel.FK_Medicine_Supplier" />
+        <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Product" />
+        <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Stock" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,117 @@
+﻿<Page x:Class="Poseidon.Pages.PgStockOut"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Poseidon.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1700"
+      Title="PgStockOut">
+
+    <Page.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1" FontSize="16">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Content="Stock Out a Product" FontWeight="Bold" Foreground="Black" FontSize="18"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" >
+            <Label Name="lblProductName" Content="[Product Name]" FontWeight="Bold" Foreground="Black" FontSize="18" VerticalAlignment="Top"/>
+            <TextBox Name="txtQuantity" Style="{StaticResource placeHolder}" Tag="Enter Exit Quantity" TextWrapping="WrapWithOverflow" IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="Teal" BorderThickness="100" ToolTip="Enter Exit Quantity" MouseLeftButtonDown="txtQuantity_MouseLeftButtonDown" KeyDown="btnKeyDown"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
+            <Label Content="From Warehouse : " VerticalAlignment="Center" Margin="10 0" />
+
+            <TextBox Name="txtFromWarehouse" Width="30" Height="30" IsReadOnly="True" VerticalAlignment="Center" Margin="10 0"/>
+            <Grid VerticalAlignment="Center">
+                <ComboBox x:Name="cmbWarehouseNo2" ItemsSource="{Binding}" Height="30" Width="120" KeyDown="btnKeyDown">
+                    <ComboBoxItem>1</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Text=" To Warehouse?" IsHitTestVisible="False" Height="25">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=cmbWarehouseNo2,Path=SelectedItem}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <Button Name="btnAdd" Height="50" VerticalAlignment="Center" ToolTip="Stock Out" Background="Transparent" BorderBrush="Transparent" Cursor="Hand" Width="50" Click="btnTransfer_Click" Margin="10 0" >
+                <Image Source="/Images/transfer.png" />
+            </Button>
+            <Image Name="btnDone" Visibility="Hidden" Source="/Images/tick.png" />
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" Name="dgStockOut" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  HorizontalAlignment="Stretch"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
+                  Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                    VerticalAlignment="Top" DataContext="{Binding}"
+                    HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                    HorizontalGridLinesBrush="Gainsboro" MouseLeftButtonUp="dgStockOut_MouseLeftButtonUp" >
+            <DataGrid.Columns>
+                <!--<DataGridCheckBoxColumn Header="Sold" Binding="{Binding IsSold}" />-->
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost/Unit" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Warehouse No" Binding="{Binding WarehouseNo}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

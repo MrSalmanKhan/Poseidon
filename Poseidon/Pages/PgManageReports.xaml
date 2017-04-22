@@ -1,0 +1,127 @@
+﻿<Page x:Class="Poseidon.PgManageReports"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Poseidon"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1700"
+      Title="PgManageReports">
+
+    <Page.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1" FontSize="16">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Content="Manage Sold Stock" FontWeight="Bold" Foreground="Black" FontSize="18"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="25,0,0,0">
+            <Label Name="lblProductName" Content="[Product Name]" FontWeight="Bold" Foreground="Black" FontSize="18" VerticalAlignment="Bottom" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"  Orientation="Horizontal" Margin="25,0,0,0">
+
+            <!--<TextBox Name="txtQuantity" Style="{StaticResource placeHolder}" Tag="Enter Quantity Sold" IsEnabled="False" Height="30" Width="200" BorderBrush="Teal" Margin="20,0,50,0" BorderThickness="100" ToolTip="Enter Sold Quantity" MouseLeftButtonDown="txtQuantity_MouseLeftButtonDown" />-->
+            <!--<DatePicker Name="dpReportDate" ToolTip="Select Date Sold" Height="22" >
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="Text" Value="Select Date Sold"/>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>-->
+
+            <Label Content="Select month" Height="25"></Label>
+            <ComboBox Height="22" Width="120" Margin="20,0,0,0" Name="cmbRptMonth">
+                <ComboBoxItem>January</ComboBoxItem>
+                <ComboBoxItem>February</ComboBoxItem>
+                <ComboBoxItem>March</ComboBoxItem>
+                <ComboBoxItem>April</ComboBoxItem>
+                <ComboBoxItem>May</ComboBoxItem>
+                <ComboBoxItem>June</ComboBoxItem>
+                <ComboBoxItem>July</ComboBoxItem>
+                <ComboBoxItem>August</ComboBoxItem>
+                <ComboBoxItem>September</ComboBoxItem>
+                <ComboBoxItem>October</ComboBoxItem>
+                <ComboBoxItem>November</ComboBoxItem>
+                <ComboBoxItem>December</ComboBoxItem>
+            </ComboBox>
+            <Label Content="select year" Height="25"></Label>
+            <ComboBox Name="cmbRptYear" Width="120" Height="22">
+
+            </ComboBox>
+
+            <!--<Button Name="btnAdd" Height="50" ToolTip="Add"  Background="Transparent" BorderBrush="Transparent" Cursor="Hand"  HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="50" Margin="50,0,50,0" Click="SaleReportByMonthly" >
+                <Image Source="/Images/sold.png" />
+            </Button>-->
+
+            <StackPanel Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Center">
+                <RadioButton GroupName="rpt" Name="rdAll" Content="All" IsChecked="True" Style="{StaticResource buttonstripe1}" ></RadioButton>
+                <RadioButton GroupName="rpt" Name="rdWeekly" Content="Weekly" Style="{StaticResource buttonstripe1}" ></RadioButton>
+                <RadioButton GroupName="rpt" Name="rdYearly" Content="Yearly" Style="{StaticResource buttonstripe1}" Margin="0,0,0,0"></RadioButton>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="5" Height="30">
+                <Button  Style="{StaticResource RoundCorner}" Width="170" Margin="10,0,0,0" Content="Generate Report" Click="SaleReportByMonthly" />
+                <Button  Style="{StaticResource RoundCorner}" Width="170" Content="Most Sold Items" Margin="10,0,0,0" Click="ReportMostSoldItems" />
+                <Button  Style="{StaticResource RoundCorner}" Width="170" Content="Least Sold Items" Margin="10,0,0,0" Click="LeastSoldItems" />
+                <Button  Style="{StaticResource RoundCorner}" Width="170" Content="All Monthly Stock" Margin="10,0,0,0" Click="AllMonthlyStock" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <DataGrid Grid.Row="3" Name="dgManageReports" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  HorizontalAlignment="Stretch"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
+                  Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                    VerticalAlignment="Top" DataContext="{Binding}"
+                    HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                    HorizontalGridLinesBrush="Gainsboro" Margin="0,0,0,0" ColumnWidth="*" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="Poseidon.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Poseidon"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="374" Width="476" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="Transparent"  AllowsTransparency="True">
+    <Window.Resources>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Name="mainG" Height="345">
+        <Button Style="{StaticResource MyButton}" Content="Login" Height="31" HorizontalAlignment="Left" Margin="193,258,0,0" Name="btnLogin" VerticalAlignment="Top" Width="100" Click="btnLogin_Click" FontFamily="Levenim MT" Foreground="White" Cursor="Hand">
+            <Button.Background>
+                <ImageBrush ImageSource="Component\Images\btnLogin.png" />
+            </Button.Background>
+        </Button>
+        <TextBox Height="25" HorizontalAlignment="Left" Margin="153,170,0,0" Name="txtName" VerticalAlignment="Top" Width="174" Text="" />
+        <Label Content="User name :" Height="28" HorizontalAlignment="Left" Margin="68,170,0,0" Name="label1" VerticalAlignment="Top" FontFamily="Levenim MT" Foreground="White" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="68,197,0,0" Name="label2" VerticalAlignment="Top" Content="Password :" FontFamily="Levenim MT" Foreground="White" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="153,202,0,0" Name="txtPwd" VerticalAlignment="Top" Width="174" Password="" />
+        <Label Content="X" Height="28" HorizontalAlignment="Left" Margin="443,74,0,0" Name="lblClose" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="16" Background="{x:Null}" Foreground="Red" MouseDown="lblClose_MouseDown" Cursor="Hand"></Label>
+        <Label Content="" Width="auto" VerticalAlignment="Top" Name="lblAlert" Foreground="Red" Margin="156,230,81,0"></Label>
+        <Grid.Background>
+            <ImageBrush ImageSource="Component/Images/bgTop.png" />
+        </Grid.Background>
+    </Grid>
+</Window>

@@ -1,0 +1,706 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PoseidonDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="24" />
+          <Property Name="Password" Type="varchar" MaxLength="16" />
+          <Property Name="AccountType" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="64" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Sex" Type="varchar" MaxLength="8" />
+          <Property Name="Address" Type="varbinary" MaxLength="128" />
+          <Property Name="Phone" Type="varchar" MaxLength="16" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="32" />
+          <Property Name="MedicalStore" Type="bit" />
+          <Property Name="Cell" Type="varchar" MaxLength="16" />
+          <Property Name="Dou" Type="bit" />
+          <Property Name="BimaNo" Type="varchar" MaxLength="32" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="DefaultCustomer" Type="bit" />
+          <Property Name="PDate" Type="date" />
+          <Property Name="RegDate" Type="date" />
+          <Property Name="Category" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alt" Type="varchar" MaxLength="8" />
+          <Property Name="Description" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Pack" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="BuyingPrice" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="Value" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="ExpiryDate" Type="date" />
+          <Property Name="Location" Type="varchar" MaxLength="128" />
+          <Property Name="IssueTo" Type="varchar" MaxLength="64" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="32" />
+          <Property Name="UOM" Type="varchar" MaxLength="64" />
+          <Property Name="Origin" Type="varchar" MaxLength="64" />
+          <Property Name="SupplierId" Type="int" />
+        </EntityType>
+        <EntityType Name="MonthlyPurchasesValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="WareHouseNo" Type="int" />
+        </EntityType>
+        <EntityType Name="MonthlyStockValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="WareHouseNo" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Origin" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="SoldItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Strength" Type="varchar" MaxLength="64" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="PackSize" Type="varchar" MaxLength="64" />
+          <Property Name="QtyPackSize" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="64" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="DateSold" Type="datetime" />
+          <Property Name="Location" Type="varchar" MaxLength="128" />
+          <Property Name="MajorSupplier" Type="varchar" MaxLength="64" />
+          <Property Name="Origin" Type="varchar" MaxLength="64" />
+          <Property Name="CostPerUnit" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="GrandTotal" Type="decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="StockItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="Strength" Type="varchar" MaxLength="64" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="PackSize" Type="varchar" MaxLength="64" />
+          <Property Name="QtyPackSize" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="64" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Location" Type="varchar" MaxLength="128" />
+          <Property Name="MajorSupplier" Type="varchar" MaxLength="64" />
+          <Property Name="CostPerUnit" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Phone" Type="varchar" MaxLength="16" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="Country" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="viewProductDetails">
+          <Key>
+            
+            <PropertyRef Name="StockItemId" />
+            
+            
+            
+          </Key>
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="StockItemId" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Origin" Type="varchar" MaxLength="64" />
+          <Property Name="Strength" Type="varchar" MaxLength="64" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="PackSize" Type="varchar" MaxLength="64" />
+          <Property Name="QtyPackSize" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="64" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Location" Type="varchar" MaxLength="128" />
+          <Property Name="MajorSupplier" Type="varchar" MaxLength="64" />
+          <Property Name="CostPerUnit" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Medicine_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItems_Product">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="StockItems" Type="Self.StockItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItems">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItems_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <End Role="StockItems" Type="Self.StockItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItems">
+              <PropertyRef Name="StockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoseidonDBModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyPurchasesValues" EntityType="Self.MonthlyPurchasesValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthlyStockValues" EntityType="Self.MonthlyStockValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoldItems" EntityType="Self.SoldItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockItems" EntityType="Self.StockItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="viewProductDetails" EntityType="Self.viewProductDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [viewProductDetails].[DateAdded] AS [DateAdded], 
+    [viewProductDetails].[StockId] AS [StockId], 
+    [viewProductDetails].[ProductId] AS [ProductId], 
+    [viewProductDetails].[StockItemId] AS [StockItemId], 
+    [viewProductDetails].[ProductName] AS [ProductName], 
+    [viewProductDetails].[GenericName] AS [GenericName], 
+    [viewProductDetails].[Origin] AS [Origin], 
+    [viewProductDetails].[Strength] AS [Strength], 
+    [viewProductDetails].[Quantity] AS [Quantity], 
+    [viewProductDetails].[PackSize] AS [PackSize], 
+    [viewProductDetails].[QtyPackSize] AS [QtyPackSize], 
+    [viewProductDetails].[ReorderLevel] AS [ReorderLevel], 
+    [viewProductDetails].[BatchNo] AS [BatchNo], 
+    [viewProductDetails].[ExpiryDate] AS [ExpiryDate], 
+    [viewProductDetails].[Location] AS [Location], 
+    [viewProductDetails].[MajorSupplier] AS [MajorSupplier], 
+    [viewProductDetails].[CostPerUnit] AS [CostPerUnit], 
+    [viewProductDetails].[TotalCost] AS [TotalCost], 
+    [viewProductDetails].[WarehouseNo] AS [WarehouseNo]
+    FROM [dbo].[viewProductDetails] AS [viewProductDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Medicine_Supplier" Association="Self.FK_Medicine_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Medicine" EntitySet="Medicine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItems_Product" Association="Self.FK_StockItems_Product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="StockItems" EntitySet="StockItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItems_Stock" Association="Self.FK_StockItems_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockItems" EntitySet="StockItems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PoseidonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PoseidonDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="PoseidonDBModel.Account" />
+          <EntitySet Name="Customers" EntityType="PoseidonDBModel.Customer" />
+          <EntitySet Name="Medicines" EntityType="PoseidonDBModel.Medicine" />
+          <EntitySet Name="MonthlyPurchasesValues" EntityType="PoseidonDBModel.MonthlyPurchasesValue" />
+          <EntitySet Name="MonthlyStockValues" EntityType="PoseidonDBModel.MonthlyStockValue" />
+          <EntitySet Name="Products" EntityType="PoseidonDBModel.Product" />
+          <EntitySet Name="SoldItems" EntityType="PoseidonDBModel.SoldItem" />
+          <EntitySet Name="Stocks" EntityType="PoseidonDBModel.Stock" />
+          <EntitySet Name="StockItems" EntityType="PoseidonDBModel.StockItem" />
+          <EntitySet Name="Suppliers" EntityType="PoseidonDBModel.Supplier" />
+          <EntitySet Name="viewProductDetails" EntityType="PoseidonDBModel.viewProductDetail" />
+          <AssociationSet Name="FK_Medicine_Supplier" Association="PoseidonDBModel.FK_Medicine_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Medicine" EntitySet="Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItems_Product" Association="PoseidonDBModel.FK_StockItems_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="StockItem" EntitySet="StockItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItems_Stock" Association="PoseidonDBModel.FK_StockItems_Stock">
+            <End Role="Stock" EntitySet="Stocks" />
+            <End Role="StockItem" EntitySet="StockItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="24" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="AccountType" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Sex" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="Binary" MaxLength="128" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="MedicalStore" Type="Boolean" />
+          <Property Name="Cell" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Dou" Type="Boolean" />
+          <Property Name="BimaNo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultCustomer" Type="Boolean" />
+          <Property Name="PDate" Type="DateTime" Precision="0" />
+          <Property Name="RegDate" Type="DateTime" Precision="0" />
+          <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Pack" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="BuyingPrice" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="Value" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IssueTo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="BatchNo" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierId" Type="Int32" />
+          <NavigationProperty Name="Supplier" Relationship="PoseidonDBModel.FK_Medicine_Supplier" FromRole="Medicine" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="MonthlyPurchasesValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="WareHouseNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MonthlyStockValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="WareHouseNo" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StockItems" Relationship="PoseidonDBModel.FK_StockItems_Product" FromRole="Product" ToRole="StockItem" />
+        </EntityType>
+        <EntityType Name="SoldItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Strength" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="PackSize" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="QtyPackSize" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="DateSold" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MajorSupplier" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="14" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GrandTotal" Type="Decimal" Precision="14" Scale="2" />
+          <NavigationProperty Name="StockItems" Relationship="PoseidonDBModel.FK_StockItems_Stock" FromRole="Stock" ToRole="StockItem" />
+        </EntityType>
+        <EntityType Name="StockItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="Strength" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="PackSize" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="QtyPackSize" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MajorSupplier" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="PoseidonDBModel.FK_StockItems_Product" FromRole="StockItem" ToRole="Product" />
+          <NavigationProperty Name="Stock" Relationship="PoseidonDBModel.FK_StockItems_Stock" FromRole="StockItem" ToRole="Stock" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Medicines" Relationship="PoseidonDBModel.FK_Medicine_Supplier" FromRole="Supplier" ToRole="Medicine" />
+        </EntityType>
+        <EntityType Name="viewProductDetail">
+          <Key>
+            <PropertyRef Name="StockItemId" />
+          </Key>
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="StockItemId" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Strength" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="PackSize" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="QtyPackSize" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MajorSupplier" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Medicine_Supplier">
+          <End Type="PoseidonDBModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.Medicine" Role="Medicine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Medicine">
+              <PropertyRef Name="SupplierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItems_Product">
+          <End Type="PoseidonDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.StockItem" Role="StockItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItem">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItems_Stock">
+          <End Type="PoseidonDBModel.Stock" Role="Stock" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.StockItem" Role="StockItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItem">
+              <PropertyRef Name="StockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PoseidonDBModelStoreContainer" CdmEntityContainer="PoseidonDBEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="PDate" ColumnName="PDate" />
+                <ScalarProperty Name="DefaultCustomer" ColumnName="DefaultCustomer" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BimaNo" ColumnName="BimaNo" />
+                <ScalarProperty Name="Dou" ColumnName="Dou" />
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="MedicalStore" ColumnName="MedicalStore" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicines">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="IssueTo" ColumnName="IssueTo" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="BuyingPrice" ColumnName="BuyingPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Pack" ColumnName="Pack" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyPurchasesValues">
+            <EntityTypeMapping TypeName="PoseidonDBModel.MonthlyPurchasesValue">
+              <MappingFragment StoreEntitySet="MonthlyPurchasesValues">
+                <ScalarProperty Name="WareHouseNo" ColumnName="WareHouseNo" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthlyStockValues">
+            <EntityTypeMapping TypeName="PoseidonDBModel.MonthlyStockValue">
+              <MappingFragment StoreEntitySet="MonthlyStockValues">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="WareHouseNo" ColumnName="WareHouseNo" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoldItems">
+            <EntityTypeMapping TypeName="PoseidonDBModel.SoldItem">
+              <MappingFragment StoreEntitySet="SoldItems">
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="MajorSupplier" ColumnName="MajorSupplier" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="DateSold" ColumnName="DateSold" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="QtyPackSize" ColumnName="QtyPackSize" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Stock">
+              <MappingFragment StoreEntitySet="Stock">
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockItems">
+            <EntityTypeMapping TypeName="PoseidonDBModel.StockItem">
+              <MappingFragment StoreEntitySet="StockItems">
+                <ScalarProperty Name="WarehouseNo" ColumnName="WarehouseNo" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="MajorSupplier" ColumnName="MajorSupplier" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="QtyPackSize" ColumnName="QtyPackSize" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="viewProductDetails">
+            <EntityTypeMapping TypeName="PoseidonDBModel.viewProductDetail">
+              <MappingFragment StoreEntitySet="viewProductDetails">
+                <ScalarProperty Name="WarehouseNo" ColumnName="WarehouseNo" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="MajorSupplier" ColumnName="MajorSupplier" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="QtyPackSize" ColumnName="QtyPackSize" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="StockItemId" ColumnName="StockItemId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

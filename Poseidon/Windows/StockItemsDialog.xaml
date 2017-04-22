@@ -1,0 +1,78 @@
+﻿<Window x:Class="Poseidon.StockItemsDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Poseidon"
+        mc:Ignorable="d"
+        Title="Select Product" Height="500" Width="450"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox Text="{Binding Path=Text,
+                                                RelativeSource={RelativeSource TemplatedParent}, 
+                                                Mode=TwoWay,
+                                                UpdateSourceTrigger=PropertyChanged}"
+                                 x:Name="textSource" 
+                                 Background="Transparent" 
+                                 Panel.ZIndex="2" />
+                            <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1" FontSize="16">
+                                <TextBox.Style>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Setter Property="Foreground" Value="Transparent"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
+                                                <Setter Property="Foreground" Value="LightGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBox Name="txtSearch" Grid.Row="0" Style="{StaticResource placeHolder}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" MinWidth="200" FontSize="14" Height="30" Tag="Search..." BorderBrush="Teal" BorderThickness="100" ToolTip="Search" TextChanged="txtSearch_TextChanged" />
+
+        <DataGrid Grid.Row="1" Name="dgStockItems" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False"
+                   MinHeight="400" MinWidth="400"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
+                  Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                    VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True" DataContext="{Binding}"
+                    HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
+                    HorizontalGridLinesBrush="Gainsboro" Margin="10,0,0,0" PreviewKeyDown="dgStockItems_PreviewKeyDown" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Cost/Unit" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Warehouse No" Binding="{Binding WarehouseNo}"></DataGridTextColumn>-->
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

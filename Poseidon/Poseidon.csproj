@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A584496-86FB-4C29-B738-ED9DF3A8B527}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Poseidon</RootNamespace>
+    <AssemblyName>Poseidon</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgCustomer.xaml.cs">
+      <DependentUpon>PgCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgHome.xaml.cs">
+      <DependentUpon>PgHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgManageReports.xaml.cs">
+      <DependentUpon>PgManageReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgManageSoldStock.xaml.cs">
+      <DependentUpon>PgManageSoldStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgRegister.xaml.cs">
+      <DependentUpon>PgRegister.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgSale.xaml.cs">
+      <DependentUpon>PgSale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgShowCurrentStock.xaml.cs">
+      <DependentUpon>PgShowCurrentStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgShowSoldStock.xaml.cs">
+      <DependentUpon>PgShowSoldStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgStockAdjustment.cs" />
+    <Compile Include="Pages\PgStockAdjustment.xaml.cs">
+      <DependentUpon>PgStockAdjustment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgStockIn.xaml.cs">
+      <DependentUpon>PgStockIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgStockOut.xaml.cs">
+      <DependentUpon>PgStockOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PgSupplier.xaml.cs">
+      <DependentUpon>PgSupplier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Windows\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StockItemsDialog.xaml.cs">
+      <DependentUpon>StockItemsDialog.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgCustomer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgManageReports.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgManageSoldStock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgRegister.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgSale.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgShowCurrentStock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgShowSoldStock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgStockAdjustment.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgStockIn.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgStockOut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\PgSupplier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\StockItemsDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PoseidonShared\PoseidonShared.csproj">
+      <Project>{2f9aafcc-5647-4cfc-b501-a57544695945}</Project>
+      <Name>PoseidonShared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoseidonUI\PoseidonUI.csproj">
+      <Project>{dc810fba-1dc9-429f-a247-35075ea49648}</Project>
+      <Name>PoseidonUI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.jpg" />
+    <Resource Include="Images\bg.jpg" />
+    <Resource Include="Images\bgTop.png" />
+    <Resource Include="Images\boss.png" />
+    <Resource Include="Images\box.png" />
+    <Resource Include="Images\boxl.png" />
+    <Resource Include="Images\btnLogin.png" />
+    <Resource Include="Images\bug.png" />
+    <Resource Include="Images\bugl.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\close1.png" />
+    <Resource Include="Images\colors.jpg" />
+    <Resource Include="Images\companylogo.jpg" />
+    <Resource Include="Images\customer.png" />
+    <Resource Include="Images\Dark64.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\edit.png" />
+    <Resource Include="Images\ExcelIcon.png" />
+    <Resource Include="Images\help.png" />
+    <Resource Include="Images\Help2.png" />
+    <Resource Include="Images\helpl.png" />
+    <Resource Include="Images\home.png" />
+    <Resource Include="Images\map.jpg" />
+    <Resource Include="Images\map2.jpg" />
+    <Resource Include="Images\medicine.png" />
+    <Resource Include="Images\mypic.jpg" />
+    <Resource Include="Images\org.png" />
+    <Resource Include="Images\orgl.png" />
+    <Resource Include="Images\Poseidon.ico" />
+    <Resource Include="Images\Report.png" />
+    <Resource Include="Images\sale.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\savel.png" />
+    <Resource Include="Images\Seamless-Polygon-Backgrounds-Vol2-full.jpg" />
+    <Resource Include="Images\sold.png" />
+    <Resource Include="Images\sold1.png" />
+    <Resource Include="Images\SoldStock.png" />
+    <Resource Include="Images\stock.png" />
+    <Resource Include="Images\StockOut.png" />
+    <Resource Include="Images\tick.png" />
+    <Resource Include="Images\times.png" />
+    <Resource Include="Images\timesl.png" />
+    <Resource Include="Images\transfer.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

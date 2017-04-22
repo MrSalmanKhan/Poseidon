@@ -1,0 +1,44 @@
+﻿<Page x:Class="Poseidon.Pages.PgShowSoldStock"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Poseidon.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1700"
+      Title="PgShowSoldStock">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Sold Stock" FontWeight="Bold" Foreground="Black" FontSize="18" Grid.Row="0"/>
+
+        <DataGrid Grid.Row="1" Name="dgManageSoldStock" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Top"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
+                   DataContext="{Binding}" ColumnHeaderHeight="30" RowHeight="30"
+                    HeadersVisibility="All" BorderBrush="Gainsboro"
+                    HorizontalGridLinesBrush="Gainsboro">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding ProductName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Generic Name" Width="*" Binding="{Binding GenericName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Origin" Width="*" Binding="{Binding Origin}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Strength" Width="*" Binding="{Binding Strength}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Pack Size" Width="*" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Qty Pack Size" Width="*" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reorder Level" Width="*" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Batch No" Width="*" Binding="{Binding BatchNo}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expiry Date" Width="*" Binding="{Binding ExpiryDate, StringFormat=\{0:dd.MM.yy\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date Sold" Width="*" Binding="{Binding DateSold, StringFormat=\{0:dd.MM.yy\}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Location" Width="*" Binding="{Binding Location}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Major Supplier" Width="*" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Cost/Unit" Width="*" Binding="{Binding CostPerUnit}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Total Cost" Width="*" Binding="{Binding TotalCost}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
