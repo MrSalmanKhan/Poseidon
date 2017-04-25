@@ -5,17 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2b1dcfe2818148faa29b8ae35e5497d7" Name="Diagram1">
-        <EntityTypeShape EntityType="PoseidonDBModel.Account" Width="1.5" PointX="5.75" PointY="7.25" />
-        <EntityTypeShape EntityType="PoseidonDBModel.Customer" Width="1.5" PointX="0.75" PointY="8.25" />
-        <EntityTypeShape EntityType="PoseidonDBModel.Medicine" Width="1.5" PointX="8" PointY="2.5" />
-        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyPurchasesValue" Width="1.5" PointX="2.75" PointY="8.25" />
-        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyStockValue" Width="1.5" PointX="7.75" PointY="7.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Account" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Customer" Width="1.5" PointX="10.75" PointY="2.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Invoice" Width="1.5" PointX="13" PointY="3.625" />
+        <EntityTypeShape EntityType="PoseidonDBModel.InvoiceItem" Width="1.5" PointX="5.25" PointY="3.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Medicine" Width="1.5" PointX="8" PointY="7.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyPurchasesValue" Width="1.5" PointX="2.75" PointY="8.125" />
+        <EntityTypeShape EntityType="PoseidonDBModel.MonthlyStockValue" Width="1.5" PointX="7.75" PointY="2.125" />
         <EntityTypeShape EntityType="PoseidonDBModel.Product" Width="1.5" PointX="0.75" PointY="3.5" />
-        <EntityTypeShape EntityType="PoseidonDBModel.SoldItem" Width="1.5" PointX="4.75" PointY="10.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.SoldItem" Width="1.5" PointX="0.75" PointY="11.125" />
         <EntityTypeShape EntityType="PoseidonDBModel.Stock" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="PoseidonDBModel.StockItem" Width="1.5" PointX="3" PointY="2.5" />
-        <EntityTypeShape EntityType="PoseidonDBModel.Supplier" Width="1.5" PointX="5.75" PointY="3.25" />
-        <EntityTypeShape EntityType="PoseidonDBModel.viewProductDetail" Width="1.5" PointX="9.75" PointY="7.25" />
+        <EntityTypeShape EntityType="PoseidonDBModel.StockItem" Width="1.5" PointX="3" PointY="2.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Supplier" Width="1.5" PointX="5.75" PointY="8.125" />
+        <EntityTypeShape EntityType="PoseidonDBModel.viewProductDetail" Width="1.5" PointX="2.75" PointY="11.125" />
+        <AssociationConnector Association="PoseidonDBModel.FK__Invoice__Custome__45F365D3" />
+        <AssociationConnector Association="PoseidonDBModel.FK__InvoiceIt__Stock__4CA06362" />
         <AssociationConnector Association="PoseidonDBModel.FK_Medicine_Supplier" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Product" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Stock" />

@@ -77,9 +77,9 @@
     <Build Include="dbo\Views\viewProductDetails.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PoseidonDB.publish.xml" />
+    <RefactorLog Include="PoseidonDB.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="PoseidonDB.refactorlog" />
+    <None Include="PoseidonDB.publish.xml" />
   </ItemGroup>
 </Project>

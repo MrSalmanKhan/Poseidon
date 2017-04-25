@@ -22,7 +22,6 @@
           <Property Name="CustomerName" Type="varchar" MaxLength="64" />
           <Property Name="Age" Type="int" />
           <Property Name="Sex" Type="varchar" MaxLength="8" />
-          <Property Name="Address" Type="varbinary" MaxLength="128" />
           <Property Name="Phone" Type="varchar" MaxLength="16" />
           <Property Name="OrganizationName" Type="varchar" MaxLength="32" />
           <Property Name="MedicalStore" Type="bit" />
@@ -34,6 +33,32 @@
           <Property Name="PDate" Type="date" />
           <Property Name="RegDate" Type="date" />
           <Property Name="Category" Type="varchar" MaxLength="16" />
+          <Property Name="Address" Type="varchar" MaxLength="512" />
+          <Property Name="Debit" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="Credit" Type="decimal" Precision="24" Scale="2" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TotalAmount" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="TotalTax" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="14" Scale="3" />
+        </EntityType>
+        <EntityType Name="InvoiceItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="StockItemId" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="SellingPrice" Type="decimal" Precision="24" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="14" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="14" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="Medicine">
           <Key>
@@ -151,11 +176,11 @@
 warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="viewProductDetails">
           <Key>
-            
+            <PropertyRef Name="ProductId" />
             <PropertyRef Name="StockItemId" />
-            
-            
-            
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="WarehouseNo" />
           </Key>
           <Property Name="DateAdded" Type="datetime" />
           <Property Name="StockId" Type="int" />
@@ -177,6 +202,30 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="TotalCost" Type="decimal" Precision="24" Scale="2" />
           <Property Name="WarehouseNo" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Invoice__Custome__45F365D3">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InvoiceIt__Stock__4CA06362">
+          <End Role="StockItems" Type="Self.StockItems" Multiplicity="1" />
+          <End Role="InvoiceItems" Type="Self.InvoiceItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItems">
+              <PropertyRef Name="StockItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Medicine_Supplier">
           <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
           <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
@@ -216,6 +265,8 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
         <EntityContainer Name="PoseidonDBModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceItems" EntityType="Self.InvoiceItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyPurchasesValues" EntityType="Self.MonthlyPurchasesValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MonthlyStockValues" EntityType="Self.MonthlyStockValues" Schema="dbo" store:Type="Tables" />
@@ -247,6 +298,14 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
     [viewProductDetails].[WarehouseNo] AS [WarehouseNo]
     FROM [dbo].[viewProductDetails] AS [viewProductDetails]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__Invoice__Custome__45F365D3" Association="Self.FK__Invoice__Custome__45F365D3">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InvoiceIt__Stock__4CA06362" Association="Self.FK__InvoiceIt__Stock__4CA06362">
+            <End Role="StockItems" EntitySet="StockItems" />
+            <End Role="InvoiceItems" EntitySet="InvoiceItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_Medicine_Supplier" Association="Self.FK_Medicine_Supplier">
             <End Role="Supplier" EntitySet="Supplier" />
             <End Role="Medicine" EntitySet="Medicine" />
@@ -267,6 +326,8 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
         <EntityContainer Name="PoseidonDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="PoseidonDBModel.Account" />
           <EntitySet Name="Customers" EntityType="PoseidonDBModel.Customer" />
+          <EntitySet Name="Invoices" EntityType="PoseidonDBModel.Invoice" />
+          <EntitySet Name="InvoiceItems" EntityType="PoseidonDBModel.InvoiceItem" />
           <EntitySet Name="Medicines" EntityType="PoseidonDBModel.Medicine" />
           <EntitySet Name="MonthlyPurchasesValues" EntityType="PoseidonDBModel.MonthlyPurchasesValue" />
           <EntitySet Name="MonthlyStockValues" EntityType="PoseidonDBModel.MonthlyStockValue" />
@@ -276,6 +337,14 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <EntitySet Name="StockItems" EntityType="PoseidonDBModel.StockItem" />
           <EntitySet Name="Suppliers" EntityType="PoseidonDBModel.Supplier" />
           <EntitySet Name="viewProductDetails" EntityType="PoseidonDBModel.viewProductDetail" />
+          <AssociationSet Name="FK__Invoice__Custome__45F365D3" Association="PoseidonDBModel.FK__Invoice__Custome__45F365D3">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InvoiceIt__Stock__4CA06362" Association="PoseidonDBModel.FK__InvoiceIt__Stock__4CA06362">
+            <End Role="StockItem" EntitySet="StockItems" />
+            <End Role="InvoiceItem" EntitySet="InvoiceItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_Medicine_Supplier" Association="PoseidonDBModel.FK_Medicine_Supplier">
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Medicine" EntitySet="Medicines" />
@@ -306,7 +375,6 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="CustomerName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="Age" Type="Int32" />
           <Property Name="Sex" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="Binary" MaxLength="128" FixedLength="false" />
           <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="OrganizationName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
           <Property Name="MedicalStore" Type="Boolean" />
@@ -318,6 +386,35 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="PDate" Type="DateTime" Precision="0" />
           <Property Name="RegDate" Type="DateTime" Precision="0" />
           <Property Name="Category" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="Debit" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="24" Scale="2" />
+          <NavigationProperty Name="Invoices" Relationship="PoseidonDBModel.FK__Invoice__Custome__45F365D3" FromRole="Customer" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="TotalTax" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="14" Scale="3" />
+          <NavigationProperty Name="Customer" Relationship="PoseidonDBModel.FK__Invoice__Custome__45F365D3" FromRole="Invoice" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="InvoiceItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="StockItemId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+          <Property Name="Tax" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="14" Scale="2" />
+          <NavigationProperty Name="StockItem" Relationship="PoseidonDBModel.FK__InvoiceIt__Stock__4CA06362" FromRole="InvoiceItem" ToRole="StockItem" />
         </EntityType>
         <EntityType Name="Medicine">
           <Key>
@@ -422,6 +519,7 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="CostPerUnit" Type="Decimal" Precision="24" Scale="2" />
           <Property Name="TotalCost" Type="Decimal" Precision="24" Scale="2" />
           <Property Name="WarehouseNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InvoiceItems" Relationship="PoseidonDBModel.FK__InvoiceIt__Stock__4CA06362" FromRole="StockItem" ToRole="InvoiceItem" />
           <NavigationProperty Name="Product" Relationship="PoseidonDBModel.FK_StockItems_Product" FromRole="StockItem" ToRole="Product" />
           <NavigationProperty Name="Stock" Relationship="PoseidonDBModel.FK_StockItems_Stock" FromRole="StockItem" ToRole="Stock" />
         </EntityType>
@@ -439,7 +537,11 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
         </EntityType>
         <EntityType Name="viewProductDetail">
           <Key>
+            <PropertyRef Name="ProductId" />
             <PropertyRef Name="StockItemId" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="WarehouseNo" />
           </Key>
           <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <Property Name="StockId" Type="Int32" />
@@ -461,6 +563,30 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="TotalCost" Type="Decimal" Precision="24" Scale="2" />
           <Property Name="WarehouseNo" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Invoice__Custome__45F365D3">
+          <End Type="PoseidonDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.Invoice" Role="Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InvoiceIt__Stock__4CA06362">
+          <End Type="PoseidonDBModel.StockItem" Role="StockItem" Multiplicity="1" />
+          <End Type="PoseidonDBModel.InvoiceItem" Role="InvoiceItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StockItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceItem">
+              <PropertyRef Name="StockItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Medicine_Supplier">
           <End Type="PoseidonDBModel.Supplier" Role="Supplier" Multiplicity="0..1" />
           <End Type="PoseidonDBModel.Medicine" Role="Medicine" Multiplicity="*" />
@@ -516,6 +642,9 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="PoseidonDBModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="RegDate" ColumnName="RegDate" />
                 <ScalarProperty Name="PDate" ColumnName="PDate" />
@@ -527,10 +656,34 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
                 <ScalarProperty Name="MedicalStore" ColumnName="MedicalStore" />
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Sex" ColumnName="Sex" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="PoseidonDBModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceItems">
+            <EntityTypeMapping TypeName="PoseidonDBModel.InvoiceItem">
+              <MappingFragment StoreEntitySet="InvoiceItems">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="StockItemId" ColumnName="StockItemId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

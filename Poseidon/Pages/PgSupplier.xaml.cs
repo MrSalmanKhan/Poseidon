@@ -1,5 +1,4 @@
-﻿using Poseidon.Windows;
-using PoseidonShared.Model;
+﻿using PoseidonShared.Model;
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Poseidon.Pages
+namespace Poseidon
 {
     /// <summary>
     /// Interaction logic for PgSupplier.xaml

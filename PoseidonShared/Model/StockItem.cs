@@ -14,6 +14,12 @@ namespace PoseidonShared.Model
     
     public partial class StockItem
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StockItem()
+        {
+            this.InvoiceItems = new HashSet<InvoiceItem>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> StockId { get; set; }
@@ -30,6 +36,8 @@ namespace PoseidonShared.Model
         public Nullable<decimal> TotalCost { get; set; }
         public int WarehouseNo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InvoiceItem> InvoiceItems { get; set; }
         public virtual Product Product { get; set; }
         public virtual Stock Stock { get; set; }
     }

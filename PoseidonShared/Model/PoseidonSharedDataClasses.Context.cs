@@ -27,6 +27,8 @@ namespace PoseidonShared.Model
     
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Invoice> Invoices { get; set; }
+        public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<MonthlyPurchasesValue> MonthlyPurchasesValues { get; set; }
         public virtual DbSet<MonthlyStockValue> MonthlyStockValues { get; set; }
