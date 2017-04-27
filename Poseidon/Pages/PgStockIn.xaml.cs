@@ -62,7 +62,9 @@ namespace Poseidon.Pages
 
                 viewStockList.Remove(row);
                 stockList.Remove(stockList.Where(x => x.ProductId == row.ProductId).Single());
-                this.AddToDataGrid();
+                if (stockList.Count == 0)
+                    btnAdd.Visibility = Visibility.Hidden;
+                
             }
             catch (Exception ex)
             {
@@ -170,6 +172,7 @@ namespace Poseidon.Pages
             stockList.Add(stockItem);
             AddToDataGrid();
             ClearFields();
+            btnAdd.Visibility = Visibility.Visible;
             btnDone.Visibility = Visibility.Hidden;
         }
         private void ClearFields()
@@ -216,7 +219,7 @@ namespace Poseidon.Pages
                 dgStockIn.ItemsSource = null;
                 stockList = null;
                 viewStockList = null;
-                btnDone.Visibility = Visibility.Visible;
+                btnDone.Visibility = Visibility.Hidden;
                 txtProductName.Focus();
             }
             catch (Exception ex)
