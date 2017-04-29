@@ -19,7 +19,6 @@ namespace Poseidon.Pages
     /// <summary>
     /// Interaction logic for PgStockIn.xaml
     /// </summary>
-
     public partial class PgStockIn : Page
     {
         PoseidonDBEntities db = new PoseidonDBEntities();
@@ -57,14 +56,14 @@ namespace Poseidon.Pages
 
                 if (row == null)
                     return;
-                 if (MessageBox.Show(String.Format("Delete '{0}' ?", row.ProductName), "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
-                     return;
+                if (MessageBox.Show(String.Format("Delete '{0}' ?", row.ProductName), "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
+                    return;
 
                 viewStockList.Remove(row);
                 stockList.Remove(stockList.Where(x => x.ProductId == row.ProductId).Single());
                 if (stockList.Count == 0)
                     btnAdd.Visibility = Visibility.Hidden;
-                
+
             }
             catch (Exception ex)
             {
@@ -72,7 +71,6 @@ namespace Poseidon.Pages
                 MessageBox.Show("Please select valid row \n" + asd, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
 
         private void btnKeyDown(object sender, KeyEventArgs e)
         {
@@ -89,7 +87,6 @@ namespace Poseidon.Pages
             product = dlg.temp;
             PopulateTxtBoxes(product);
         }
-
         private void PopulateTxtBoxes(Product product)
         {
             if (product != null)
@@ -196,7 +193,7 @@ namespace Poseidon.Pages
         {
             try
             {
-               
+
                 Stock stock = new Stock();
                 stock.Timestamp = DateTime.Now;
                 decimal grandTotal = 0;
@@ -219,7 +216,7 @@ namespace Poseidon.Pages
                 dgStockIn.ItemsSource = null;
                 stockList = null;
                 viewStockList = null;
-                btnDone.Visibility = Visibility.Hidden;
+                btnDone.Visibility = Visibility.Visible;
                 txtProductName.Focus();
             }
             catch (Exception ex)

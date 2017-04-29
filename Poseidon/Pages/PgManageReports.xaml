@@ -46,22 +46,22 @@
             <RowDefinition Height="90" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" Content="Manage Sold Stock" FontWeight="Bold" Foreground="Black" FontSize="18"/>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="25,0,0,0">
+
+        <Label Grid.Row="0" Content="Reports" FontWeight="Bold" Foreground="Black" FontSize="18"/>
+        <!--<StackPanel Grid.Row="1" Orientation="Horizontal" Margin="25,0,0,0">
             <Label Name="lblProductName" Content="[Product Name]" FontWeight="Bold" Foreground="Black" FontSize="18" VerticalAlignment="Bottom" />
         </StackPanel>
 
         <StackPanel Grid.Row="2"  Orientation="Horizontal" Margin="25,0,0,0">
 
-            <!--<TextBox Name="txtQuantity" Style="{StaticResource placeHolder}" Tag="Enter Quantity Sold" IsEnabled="False" Height="30" Width="200" BorderBrush="Teal" Margin="20,0,50,0" BorderThickness="100" ToolTip="Enter Sold Quantity" MouseLeftButtonDown="txtQuantity_MouseLeftButtonDown" />-->
+            --><!--<TextBox Name="txtQuantity" Style="{StaticResource placeHolder}" Tag="Enter Quantity Sold" IsEnabled="False" Height="30" Width="200" BorderBrush="Teal" Margin="20,0,50,0" BorderThickness="100" ToolTip="Enter Sold Quantity" MouseLeftButtonDown="txtQuantity_MouseLeftButtonDown" />-->
             <!--<DatePicker Name="dpReportDate" ToolTip="Select Date Sold" Height="22" >
                 <DatePicker.Resources>
                     <Style TargetType="DatePickerTextBox">
                         <Setter Property="Text" Value="Select Date Sold"/>
                     </Style>
                 </DatePicker.Resources>
-            </DatePicker>-->
+            </DatePicker>--><!--
 
             <Label Content="Select month" Height="25"></Label>
             <ComboBox Height="22" Width="120" Margin="20,0,0,0" Name="cmbRptMonth">
@@ -83,9 +83,9 @@
 
             </ComboBox>
 
-            <!--<Button Name="btnAdd" Height="50" ToolTip="Add"  Background="Transparent" BorderBrush="Transparent" Cursor="Hand"  HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="50" Margin="50,0,50,0" Click="SaleReportByMonthly" >
+            --><!--<Button Name="btnAdd" Height="50" ToolTip="Add"  Background="Transparent" BorderBrush="Transparent" Cursor="Hand"  HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="50" Margin="50,0,50,0" Click="SaleReportByMonthly" >
                 <Image Source="/Images/sold.png" />
-            </Button>-->
+            </Button>--><!--
 
             <StackPanel Orientation="Vertical" Margin="10,0,10,0" VerticalAlignment="Center">
                 <RadioButton GroupName="rpt" Name="rdAll" Content="All" IsChecked="True" Style="{StaticResource buttonstripe1}" ></RadioButton>
@@ -122,6 +122,91 @@
                 <DataGridTextColumn Header="Major Supplier" Binding="{Binding MajorSupplier}"></DataGridTextColumn>
 
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid>-->
     </Grid>
 </Page>
+
+<!--<Application.Resources>
+    <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid">
+                        <Border x:Name="border" CornerRadius="8" BorderBrush="Black" BorderThickness="2">
+                            <Border.Background>
+                                <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                    <RadialGradientBrush.RelativeTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5" 
+                                   ScaleX="1.5" ScaleY="1.5"/>
+                                            <TranslateTransform X="0.02" Y="0.3"/>
+                                        </TransformGroup>
+                                    </RadialGradientBrush.RelativeTransform>
+                                    <GradientStop Offset="1" Color="#00000000"/>
+                                    <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         TextElement.FontWeight="Bold"></ContentPresenter>
+                        </Border>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                                        <RadialGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
+                                                <TranslateTransform X="0.02" Y="0.3"/>
+                                            </TransformGroup>
+                                        </RadialGradientBrush.RelativeTransform>
+                                        <GradientStop Color="#00000000" Offset="1"/>
+                                        <GradientStop Color="#FF303030" Offset="0.3"/>
+                                    </RadialGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe1">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <BulletDecorator Cursor="Hand">
+                        <Border Width="60" Height="20" CornerRadius="3" BorderBrush="#FFE2E2E2" BorderThickness="1">
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <Border Margin="5,0,48,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                            </Grid>
+                        </Border>
+                    </BulletDecorator>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter TargetName="RadioMark" Property="Background" Value="Blue"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Application.Resources>-->

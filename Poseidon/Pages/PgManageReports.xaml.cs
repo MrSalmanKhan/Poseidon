@@ -30,8 +30,8 @@ namespace Poseidon
             //LoadYears();
         }
 
-        private void SaleReportByMonthly(object sender, RoutedEventArgs e)
-        {
+        //private void SaleReportByMonthly(object sender, RoutedEventArgs e)
+        //{
         //    //var EditIds = dgManageReports.SelectedItems.Count;
         //    if (cmbRptMonth.Text == "" || cmbRptYear.Text == "")
         //    {
@@ -63,7 +63,7 @@ namespace Poseidon
         //        }
         //        new ReportViewerSale("", type, month, year).Show();
         //    }
-        }
+       // }
 
         //private void RefreshDataGrid()
         //{
@@ -85,8 +85,8 @@ namespace Poseidon
         //    }
         //}
 
-        private void ReportMostSoldItems(object sender, RoutedEventArgs e)
-        {
+        //private void ReportMostSoldItems(object sender, RoutedEventArgs e)
+        //{
         //    if (cmbRptMonth.Text == "" || cmbRptYear.Text == "")
         //    {
         //        MessageBox.Show("Please select month and year", "Missing Requirements", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -111,10 +111,10 @@ namespace Poseidon
         //        }
         //        new ReportViewerSale("most", type, month, year).Show();
         //    }
-        }
+        //}
 
-        private void LeastSoldItems(object sender, RoutedEventArgs e)
-        {
+        //private void LeastSoldItems(object sender, RoutedEventArgs e)
+        //{
         //    if (cmbRptMonth.Text == "" || cmbRptYear.Text == "")
         //    {
         //        MessageBox.Show("Please select month and year", "Missing Requirements", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -139,10 +139,10 @@ namespace Poseidon
         //        }
         //        new ReportViewerSale("least", type, month, year).Show();
         //    }
-        }
+        //}
 
-        private void AllMonthlyStock(object sender, RoutedEventArgs e)
-        {
+        //private void AllMonthlyStock(object sender, RoutedEventArgs e)
+        //{
         //    if (cmbRptMonth.Text == "" || cmbRptYear.Text == "")
         //    {
         //        MessageBox.Show("Please select month and year", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -154,6 +154,6 @@ namespace Poseidon
         //        var year = cmbRptYear.Text;
         //        new ReportViewerSale(month, year).Show();
         //    }
-        }
+        //}
     }
 }

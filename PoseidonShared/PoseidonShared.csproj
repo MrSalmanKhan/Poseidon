@@ -74,12 +74,6 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Invoice.cs">
-      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InvoiceItem.cs">
-      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\MonthlyPurchasesValue.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
