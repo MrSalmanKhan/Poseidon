@@ -138,6 +138,26 @@
           <Property Name="TotalCost" Type="decimal" Precision="24" Scale="2" />
           <Property Name="WarehouseNo" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="StockItemsForReporting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="Strength" Type="varchar" MaxLength="64" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="PackSize" Type="varchar" MaxLength="64" />
+          <Property Name="QtyPackSize" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="BatchNo" Type="varchar" MaxLength="64" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Location" Type="varchar" MaxLength="128" />
+          <Property Name="MajorSupplier" Type="varchar" MaxLength="64" />
+          <Property Name="CostPerUnit" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="Id" />
@@ -215,6 +235,30 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StockItemsForReporting_Product">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="StockItemsForReporting" Type="Self.StockItemsForReporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItemsForReporting">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItemsForReporting_Stock">
+          <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+          <End Role="StockItemsForReporting" Type="Self.StockItemsForReporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItemsForReporting">
+              <PropertyRef Name="StockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PoseidonDBModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
@@ -225,6 +269,7 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <EntitySet Name="SoldItems" EntityType="Self.SoldItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stock" EntityType="Self.Stock" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockItems" EntityType="Self.StockItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockItemsForReporting" EntityType="Self.StockItemsForReporting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="viewProductDetails" EntityType="Self.viewProductDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -261,6 +306,14 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
             <End Role="Stock" EntitySet="Stock" />
             <End Role="StockItems" EntitySet="StockItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_StockItemsForReporting_Product" Association="Self.FK_StockItemsForReporting_Product">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="StockItemsForReporting" EntitySet="StockItemsForReporting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItemsForReporting_Stock" Association="Self.FK_StockItemsForReporting_Stock">
+            <End Role="Stock" EntitySet="Stock" />
+            <End Role="StockItemsForReporting" EntitySet="StockItemsForReporting" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -289,6 +342,15 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <AssociationSet Name="FK_StockItems_Stock" Association="PoseidonDBModel.FK_StockItems_Stock">
             <End Role="Stock" EntitySet="Stocks" />
             <End Role="StockItem" EntitySet="StockItems" />
+          </AssociationSet>
+          <EntitySet Name="StockItemsForReportings" EntityType="PoseidonDBModel.StockItemsForReporting" />
+          <AssociationSet Name="FK_StockItemsForReporting_Product" Association="PoseidonDBModel.FK_StockItemsForReporting_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="StockItemsForReporting" EntitySet="StockItemsForReportings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockItemsForReporting_Stock" Association="PoseidonDBModel.FK_StockItemsForReporting_Stock">
+            <End Role="Stock" EntitySet="Stocks" />
+            <End Role="StockItemsForReporting" EntitySet="StockItemsForReportings" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -376,6 +438,7 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="StockItems" Relationship="PoseidonDBModel.FK_StockItems_Product" FromRole="Product" ToRole="StockItem" />
+          <NavigationProperty Name="StockItemsForReportings" Relationship="PoseidonDBModel.FK_StockItemsForReporting_Product" FromRole="Product" ToRole="StockItemsForReporting" />
         </EntityType>
         <EntityType Name="SoldItem">
           <Key>
@@ -406,6 +469,7 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="GrandTotal" Type="Decimal" Precision="14" Scale="2" />
           <NavigationProperty Name="StockItems" Relationship="PoseidonDBModel.FK_StockItems_Stock" FromRole="Stock" ToRole="StockItem" />
+          <NavigationProperty Name="StockItemsForReportings" Relationship="PoseidonDBModel.FK_StockItemsForReporting_Stock" FromRole="Stock" ToRole="StockItemsForReporting" />
         </EntityType>
         <EntityType Name="StockItem">
           <Key>
@@ -501,6 +565,52 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StockItem">
+              <PropertyRef Name="StockId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StockItemsForReporting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="Strength" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="PackSize" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="QtyPackSize" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="BatchNo" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="MajorSupplier" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="TotalCost" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="WarehouseNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="PoseidonDBModel.FK_StockItemsForReporting_Product" FromRole="StockItemsForReporting" ToRole="Product" />
+          <NavigationProperty Name="Stock" Relationship="PoseidonDBModel.FK_StockItemsForReporting_Stock" FromRole="StockItemsForReporting" ToRole="Stock" />
+        </EntityType>
+        <Association Name="FK_StockItemsForReporting_Product">
+          <End Type="PoseidonDBModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.StockItemsForReporting" Role="StockItemsForReporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItemsForReporting">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockItemsForReporting_Stock">
+          <End Type="PoseidonDBModel.Stock" Role="Stock" Multiplicity="0..1" />
+          <End Type="PoseidonDBModel.StockItemsForReporting" Role="StockItemsForReporting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stock">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StockItemsForReporting">
               <PropertyRef Name="StockId" />
             </Dependent>
           </ReferentialConstraint>
@@ -687,6 +797,27 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="StockId" ColumnName="StockId" />
                 <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockItemsForReportings">
+            <EntityTypeMapping TypeName="PoseidonDBModel.StockItemsForReporting">
+              <MappingFragment StoreEntitySet="StockItemsForReporting">
+                <ScalarProperty Name="WarehouseNo" ColumnName="WarehouseNo" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="MajorSupplier" ColumnName="MajorSupplier" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="BatchNo" ColumnName="BatchNo" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="QtyPackSize" ColumnName="QtyPackSize" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

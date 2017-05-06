@@ -62,6 +62,7 @@ namespace Poseidon
                     return;
 
                 db.StockItems.Remove(db.StockItems.Where(x => x.Id == row.StockItemId).Single());
+                db.SaveChanges();
                 this.RefreshDataGrid();
             }
             catch (Exception ex)

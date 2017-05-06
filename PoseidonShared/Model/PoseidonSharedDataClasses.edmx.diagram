@@ -12,13 +12,16 @@
         <EntityTypeShape EntityType="PoseidonDBModel.MonthlyStockValue" Width="1.5" PointX="7.75" PointY="7.375" />
         <EntityTypeShape EntityType="PoseidonDBModel.Product" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="PoseidonDBModel.SoldItem" Width="1.5" PointX="4.75" PointY="10.375" />
-        <EntityTypeShape EntityType="PoseidonDBModel.Stock" Width="1.5" PointX="0.75" PointY="4" />
-        <EntityTypeShape EntityType="PoseidonDBModel.StockItem" Width="1.5" PointX="3" PointY="2.75" />
-        <EntityTypeShape EntityType="PoseidonDBModel.Supplier" Width="1.5" PointX="5.75" PointY="3.5" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Stock" Width="1.5" PointX="2.75" PointY="3.625" />
+        <EntityTypeShape EntityType="PoseidonDBModel.StockItem" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Supplier" Width="1.5" PointX="10.125" PointY="3.25" />
         <EntityTypeShape EntityType="PoseidonDBModel.viewProductDetail" Width="1.5" PointX="9.75" PointY="7.375" />
         <AssociationConnector Association="PoseidonDBModel.FK_Medicine_Supplier" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Product" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItems_Stock" />
+        <EntityTypeShape EntityType="PoseidonDBModel.StockItemsForReporting" Width="1.5" PointX="4.75" PointY="3.625" />
+        <AssociationConnector Association="PoseidonDBModel.FK_StockItemsForReporting_Product" />
+        <AssociationConnector Association="PoseidonDBModel.FK_StockItemsForReporting_Stock" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

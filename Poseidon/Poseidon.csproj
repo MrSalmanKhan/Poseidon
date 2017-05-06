@@ -90,7 +90,6 @@
     <Compile Include="Pages\PgShowSoldStock.xaml.cs">
       <DependentUpon>PgShowSoldStock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\PgStockAdjustment.cs" />
     <Compile Include="Pages\PgStockAdjustment.xaml.cs">
       <DependentUpon>PgStockAdjustment.xaml</DependentUpon>
     </Compile>

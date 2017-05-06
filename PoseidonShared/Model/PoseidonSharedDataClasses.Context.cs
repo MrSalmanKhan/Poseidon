@@ -36,5 +36,6 @@ namespace PoseidonShared.Model
         public virtual DbSet<StockItem> StockItems { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<viewProductDetail> viewProductDetails { get; set; }
+        public virtual DbSet<StockItemsForReporting> StockItemsForReportings { get; set; }
     }
 }
