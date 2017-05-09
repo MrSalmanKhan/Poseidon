@@ -132,7 +132,7 @@ namespace Poseidon.Pages
                 return;
             }
 
-           
+
             viewProductDetail temp = new viewProductDetail();
 
             temp.ProductId = product.Id;
