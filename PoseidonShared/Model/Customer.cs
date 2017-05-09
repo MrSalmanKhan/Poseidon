@@ -14,6 +14,12 @@ namespace PoseidonShared.Model
     
     public partial class Customer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customer()
+        {
+            this.Invoices = new HashSet<Invoice>();
+        }
+    
         public int Id { get; set; }
         public string CustomerName { get; set; }
         public Nullable<int> Age { get; set; }
@@ -32,5 +38,8 @@ namespace PoseidonShared.Model
         public string Address { get; set; }
         public Nullable<decimal> Debit { get; set; }
         public Nullable<decimal> Credit { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

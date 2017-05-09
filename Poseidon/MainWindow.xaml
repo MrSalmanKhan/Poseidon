@@ -33,7 +33,7 @@
                         <PoseidonUI:MenuButton Image="Images\Sale.png" Text="Sale" >
                             <PoseidonUI:MenuButton.Children>
                                 <PoseidonUI:MenuButton Text="Cash Sale" />
-                                <PoseidonUI:MenuButton Text="Invoice Sale" />
+                                <PoseidonUI:MenuButton Text="Invoice Sale" MouseLeftButtonDown="navInvoice_MouseLeftButtonDown" />
                                 <PoseidonUI:MenuButton Text="Performa" />
                                 <PoseidonUI:MenuButton Text="Manage Sold Stock" MouseLeftButtonDown="navManageSoldStock_MouseLeftButtonDown" />
                                 <PoseidonUI:MenuButton Text="Show Sold Stock" MouseLeftButtonDown="navShowSoldStock_MouseLeftButtonDown"/>
@@ -53,9 +53,10 @@
 
                         </PoseidonUI:MenuButton>
                         <PoseidonUI:MenuButton Image="Images\customer.png" Text="Customers" MouseLeftButtonDown="navCustomer_MouseLeftButtonDown"/>
-
+                         
                         <PoseidonUI:MenuButton Image="Images\Report.png" Text="Reports" MouseLeftButtonDown="OpenReportsPage"></PoseidonUI:MenuButton>
-                        <PoseidonUI:MenuButton Image="Images\help.png" Text="Accounts" ></PoseidonUI:MenuButton>
+                        <PoseidonUI:MenuButton Image="Images\help.png" Text="Users" ></PoseidonUI:MenuButton>
+                        <PoseidonUI:MenuButton Image="Images\bankAccounts.jpg" Text="Accounts" MouseLeftButtonDown="navAccounts_MouseLeftButtonDown" Margin="0,1,1,1"/>
                         <PoseidonUI:MenuButton Image="Images\timesl.png" Text="Close Menu" MouseDown="CloseClick">
                         </PoseidonUI:MenuButton>
 

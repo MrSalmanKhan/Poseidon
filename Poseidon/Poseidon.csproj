@@ -46,6 +46,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -66,11 +68,17 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\pgBankAccounts.xaml.cs">
+      <DependentUpon>pgBankAccounts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PgCustomer.xaml.cs">
       <DependentUpon>PgCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PgHome.xaml.cs">
       <DependentUpon>PgHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\pgInvoice.xaml.cs">
+      <DependentUpon>pgInvoice.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PgManageReports.xaml.cs">
       <DependentUpon>PgManageReports.xaml</DependentUpon>
@@ -143,11 +151,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\pgBankAccounts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PgCustomer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\PgHome.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\pgInvoice.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -254,6 +270,9 @@
     <Resource Include="Images\times.png" />
     <Resource Include="Images\timesl.png" />
     <Resource Include="Images\transfer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bankAccounts.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
