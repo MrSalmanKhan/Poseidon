@@ -25,6 +25,7 @@ namespace PoseidonShared.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }
         public virtual DbSet<MonthlyPurchasesValue> MonthlyPurchasesValues { get; set; }
@@ -35,10 +36,6 @@ namespace PoseidonShared.Model
         public virtual DbSet<StockItem> StockItems { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<viewProductDetail> viewProductDetails { get; set; }
-        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<InvoiceItem> InvoiceItems { get; set; }
-        public virtual DbSet<tblBankAccount> tblBankAccounts { get; set; }
-        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<StockItemsForReporting> StockItemsForReportings { get; set; }
     }
 }

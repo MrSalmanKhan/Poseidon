@@ -124,6 +124,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PoseidonSharedDataClasses.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\StockItemsForReporting.cs">
+      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Supplier.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>

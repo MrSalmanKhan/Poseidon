@@ -131,6 +131,8 @@ namespace Poseidon.Pages
                 MessageBox.Show("Please Enter the required field 'Warehouse No.'", "Incomplete Entry", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+           
             viewProductDetail temp = new viewProductDetail();
 
             temp.ProductId = product.Id;
@@ -149,6 +151,16 @@ namespace Poseidon.Pages
             temp.CostPerUnit = decimal.Parse(txtCostPerUnit.Text); // required
             temp.TotalCost = (Convert.ToDecimal(temp.Quantity)) * (Convert.ToDecimal(temp.QtyPackSize)) * temp.CostPerUnit;
             temp.WarehouseNo = int.Parse(cmbWarehouseNo.Text); // required
+
+            // Give warning if product already exist in stock
+            StockItem checkStockItem = db.StockItems.Where(x => x.ProductId == temp.ProductId && x.WarehouseNo == temp.WarehouseNo).Single();
+            if (checkStockItem != null && checkStockItem.Quantity > 0)
+            {
+                if (MessageBox.Show(String.Format("'{0}' already exists in Stock and has Quantity '{1}'. If you continue this quantity will be added in the new quantity. Would you like to continue?", temp.ProductName, checkStockItem.Quantity), "Confirm Update", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)
+                {
+                    return;
+                }
+            }
 
             StockItem stockItem = new StockItem();
             stockItem.ProductId = temp.ProductId;
@@ -193,7 +205,6 @@ namespace Poseidon.Pages
         {
             try
             {
-
                 Stock stock = new Stock();
                 stock.Timestamp = DateTime.Now;
                 decimal grandTotal = 0;
@@ -208,9 +219,54 @@ namespace Poseidon.Pages
                 foreach (StockItem s in stockList)
                 {
                     s.StockId = stock.Id;
+                    StockItem stockItem = db.StockItems.Where(x => x.ProductId == s.ProductId && x.WarehouseNo == s.WarehouseNo).Single();
+                    if (stockItem != null)
+                    {
+                        // Stock already exist, Update operation
+                        stockItem.Quantity = stockItem.Quantity + s.Quantity;
+                        stockItem.TotalCost = stockItem.TotalCost + s.TotalCost;
+                        stockItem.Strength = s.Strength;
+                        stockItem.PackSize = s.PackSize;
+                        stockItem.QtyPackSize = s.QtyPackSize;
+                        stockItem.ReorderLevel = s.ReorderLevel;
+                        stockItem.BatchNo = s.BatchNo;
+                        stockItem.ExpiryDate = s.ExpiryDate;
+                        stockItem.Location = s.Location;
+                        stockItem.MajorSupplier = s.MajorSupplier;
+                        stockItem.CostPerUnit = s.CostPerUnit;
+                    }
+                    else
+                    {
+                        // Not Matched, Insert Operation
+                        db.StockItems.Add(s);
+                    }
+                    db.SaveChanges();
                 }
 
-                db.StockItems.AddRange(stockList);
+                List<StockItemsForReporting> stockItemsforReporting = new List<StockItemsForReporting>();
+                foreach (StockItem si in stockList)
+                {
+                    StockItemsForReporting stockItemforReporting = new StockItemsForReporting();
+                    stockItemforReporting.StockId = stock.Id;
+
+                    stockItemforReporting.ProductId = si.ProductId;
+                    stockItemforReporting.Strength = si.Strength;
+                    stockItemforReporting.Quantity = si.Quantity;
+                    stockItemforReporting.PackSize = si.PackSize;
+                    stockItemforReporting.QtyPackSize = si.QtyPackSize;
+                    stockItemforReporting.ReorderLevel = si.ReorderLevel;
+                    stockItemforReporting.BatchNo = si.BatchNo;
+                    stockItemforReporting.ExpiryDate = si.ExpiryDate;
+                    stockItemforReporting.Location = si.Location;
+                    stockItemforReporting.MajorSupplier = si.MajorSupplier;
+                    stockItemforReporting.CostPerUnit = si.CostPerUnit;
+                    stockItemforReporting.TotalCost = si.TotalCost;
+                    stockItemforReporting.WarehouseNo = si.WarehouseNo;
+
+                    stockItemsforReporting.Add(stockItemforReporting);
+                }
+
+                db.StockItemsForReportings.AddRange(stockItemsforReporting);
                 db.SaveChanges();
 
                 dgStockIn.ItemsSource = null;
