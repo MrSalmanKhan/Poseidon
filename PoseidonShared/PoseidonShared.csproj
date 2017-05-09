@@ -74,6 +74,15 @@
     <Compile Include="Model\Customer.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\C__RefactorLog.cs">
+      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Invoice.cs">
+      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\InvoiceItem.cs">
+      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\MonthlyPurchasesValue.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
@@ -118,6 +127,10 @@
     <Compile Include="Model\Supplier.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\tblBankAccount.cs">
+      <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\viewInvoice.cs" />
     <Compile Include="Model\viewProductDetail.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>

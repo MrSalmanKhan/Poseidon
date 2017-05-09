@@ -107,6 +107,11 @@ namespace Poseidon
         {
             MainFrame.Navigate(new PgRegister());
         }
+
+        private void navInvoice_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new pgInvoice());
+        }
         private void navStockIn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             MainFrame.Navigate(new PgStockIn());
@@ -133,5 +138,12 @@ namespace Poseidon
         {
             MainFrame.Navigate(new PgStockAdjustment());
         }
+
+        private void navAccounts_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MainFrame.Navigate(new pgBankAccounts());
+        }
+
+       
     }
 }
