@@ -12,8 +12,12 @@ namespace PoseidonShared.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class C__RefactorLog
+    public partial class BankAccount
     {
-        public System.Guid OperationKey { get; set; }
+        public int Id { get; set; }
+        public System.DateTime TimeStamp { get; set; }
+        public string AccountTitle { get; set; }
+        public string BankName { get; set; }
+        public Nullable<decimal> Balance { get; set; }
     }
 }

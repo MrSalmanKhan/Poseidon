@@ -24,10 +24,12 @@ namespace PoseidonShared.Model
         public int Id { get; set; }
         public System.DateTime Timestamp { get; set; }
         public Nullable<decimal> GrandTotal { get; set; }
+        public Nullable<int> SupplierId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockItem> StockItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StockItemsForReporting> StockItemsForReportings { get; set; }
+        public virtual Supplier Supplier { get; set; }
     }
 }

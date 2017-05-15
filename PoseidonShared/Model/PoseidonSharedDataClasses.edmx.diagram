@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2b1dcfe2818148faa29b8ae35e5497d7" Name="Diagram1">
-        <EntityTypeShape EntityType="PoseidonDBModel.Account" Width="1.5" PointX="5.75" PointY="7.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Account" Width="1.5" PointX="5.75" PointY="8.375" />
         <EntityTypeShape EntityType="PoseidonDBModel.Customer" Width="1.5" PointX="0.75" PointY="8.375" />
         <EntityTypeShape EntityType="PoseidonDBModel.Medicine" Width="1.5" PointX="8" PointY="2.625" />
         <EntityTypeShape EntityType="PoseidonDBModel.MonthlyPurchasesValue" Width="1.5" PointX="2.75" PointY="8.375" />
@@ -22,6 +22,14 @@
         <EntityTypeShape EntityType="PoseidonDBModel.StockItemsForReporting" Width="1.5" PointX="4.75" PointY="3.625" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItemsForReporting_Product" />
         <AssociationConnector Association="PoseidonDBModel.FK_StockItemsForReporting_Stock" />
+        <EntityTypeShape EntityType="PoseidonDBModel.Invoice" Width="1.5" PointX="2.75" PointY="11.375" />
+        <EntityTypeShape EntityType="PoseidonDBModel.InvoiceItem" Width="1.5" PointX="6.125" PointY="0.625" />
+        <EntityTypeShape EntityType="PoseidonDBModel.tblBankAccount" Width="1.5" PointX="15.5" PointY="1.75" />
+        <AssociationConnector Association="PoseidonDBModel.FK__Invoice__Custome__693CA210" />
+        <AssociationConnector Association="PoseidonDBModel.FK__InvoiceIt__Stock__6A30C649" />
+        <EntityTypeShape EntityType="PoseidonDBModel.BankAccount" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="PoseidonDBModel.FK_InvoiceItems_Invoice" />
+        <AssociationConnector Association="PoseidonDBModel.FK_Stock_Supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

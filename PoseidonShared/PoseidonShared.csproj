@@ -71,10 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\PoseidonSharedUtility.cs" />
-    <Compile Include="Model\Customer.cs">
+    <Compile Include="Model\BankAccount.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\C__RefactorLog.cs">
+    <Compile Include="Model\Customer.cs">
       <DependentUpon>PoseidonSharedDataClasses.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Invoice.cs">

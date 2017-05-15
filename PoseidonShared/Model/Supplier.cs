@@ -18,6 +18,7 @@ namespace PoseidonShared.Model
         public Supplier()
         {
             this.Medicines = new HashSet<Medicine>();
+            this.Stocks = new HashSet<Stock>();
         }
     
         public int Id { get; set; }
@@ -29,5 +30,7 @@ namespace PoseidonShared.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Medicine> Medicines { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Stock> Stocks { get; set; }
     }
 }
