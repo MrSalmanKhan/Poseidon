@@ -129,6 +129,9 @@
     <Compile Include="Windows\StockItemsDialog.xaml.cs">
       <DependentUpon>StockItemsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\StockItemsInvoiceDialog.xaml.cs">
+      <DependentUpon>StockItemsInvoiceDialog.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -214,6 +217,10 @@
     <Page Include="Windows\StockItemsDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\StockItemsInvoiceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

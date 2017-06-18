@@ -214,6 +214,36 @@
           <Property Name="Balance" Type="decimal" Precision="24" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'PoseidonDB.dbo.InvoiceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="InvoiceView">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+            <PropertyRef Name="TimeStamp" />
+            <PropertyRef Name="invoiceItemId" />
+            <PropertyRef Name="StockItemId" />
+            <PropertyRef Name="Qty" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="invoiceId" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="TotalAmount" Type="decimal" Precision="24" Scale="2" />
+          <Property Name="TotalDiscount" Type="decimal" Precision="14" Scale="3" />
+          <Property Name="TotalTax" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="invoiceItemId" Type="int" Nullable="false" />
+          <Property Name="StockItemId" Type="int" Nullable="false" />
+          <Property Name="Qty" Type="int" Nullable="false" />
+          <Property Name="SellingPrice" Type="decimal" Precision="24" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="Discount" Type="decimal" Precision="14" Scale="2" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="GenericName" Type="varchar" MaxLength="128" />
+          <Property Name="Origin" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="viewProductDetails">
           <Key>
@@ -355,6 +385,26 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
           <EntitySet Name="StockItemsForReporting" EntityType="Self.StockItemsForReporting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBankAccount" EntityType="Self.tblBankAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceView" EntityType="Self.InvoiceView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [InvoiceView].[invoiceId] AS [invoiceId], 
+    [InvoiceView].[TimeStamp] AS [TimeStamp], 
+    [InvoiceView].[CustomerId] AS [CustomerId], 
+    [InvoiceView].[TotalAmount] AS [TotalAmount], 
+    [InvoiceView].[TotalDiscount] AS [TotalDiscount], 
+    [InvoiceView].[TotalTax] AS [TotalTax], 
+    [InvoiceView].[invoiceItemId] AS [invoiceItemId], 
+    [InvoiceView].[StockItemId] AS [StockItemId], 
+    [InvoiceView].[Qty] AS [Qty], 
+    [InvoiceView].[SellingPrice] AS [SellingPrice], 
+    [InvoiceView].[Tax] AS [Tax], 
+    [InvoiceView].[Discount] AS [Discount], 
+    [InvoiceView].[Id] AS [Id], 
+    [InvoiceView].[ProductName] AS [ProductName], 
+    [InvoiceView].[GenericName] AS [GenericName], 
+    [InvoiceView].[Origin] AS [Origin]
+    FROM [dbo].[InvoiceView] AS [InvoiceView]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="viewProductDetails" EntityType="Self.viewProductDetails" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [viewProductDetails].[DateAdded] AS [DateAdded], 
@@ -468,6 +518,7 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="Stock" EntitySet="Stocks" />
           </AssociationSet>
+          <EntitySet Name="InvoiceViews" EntityType="PoseidonDBModel.InvoiceView" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -831,6 +882,34 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InvoiceView">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+            <PropertyRef Name="TimeStamp" />
+            <PropertyRef Name="invoiceItemId" />
+            <PropertyRef Name="StockItemId" />
+            <PropertyRef Name="Qty" />
+            <PropertyRef Name="SellingPrice" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProductName" />
+          </Key>
+          <Property Name="invoiceId" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="24" Scale="2" />
+          <Property Name="TotalDiscount" Type="Decimal" Precision="14" Scale="3" />
+          <Property Name="TotalTax" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="invoiceItemId" Type="Int32" Nullable="false" />
+          <Property Name="StockItemId" Type="Int32" Nullable="false" />
+          <Property Name="Qty" Type="Int32" Nullable="false" />
+          <Property Name="SellingPrice" Type="Decimal" Nullable="false" Precision="24" Scale="2" />
+          <Property Name="Tax" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="14" Scale="2" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="GenericName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1082,6 +1161,28 @@ warning 6002: The table/view 'PoseidonDB.dbo.viewProductDetails' does not have a
                 <ScalarProperty Name="AccountTitle" ColumnName="AccountTitle" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceViews">
+            <EntityTypeMapping TypeName="PoseidonDBModel.InvoiceView">
+              <MappingFragment StoreEntitySet="InvoiceView">
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="GenericName" ColumnName="GenericName" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="StockItemId" ColumnName="StockItemId" />
+                <ScalarProperty Name="invoiceItemId" ColumnName="invoiceItemId" />
+                <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

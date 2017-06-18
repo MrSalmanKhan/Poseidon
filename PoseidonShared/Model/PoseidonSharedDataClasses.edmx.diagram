@@ -30,6 +30,7 @@
         <EntityTypeShape EntityType="PoseidonDBModel.BankAccount" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="PoseidonDBModel.FK_InvoiceItems_Invoice" />
         <AssociationConnector Association="PoseidonDBModel.FK_Stock_Supplier" />
+        <EntityTypeShape EntityType="PoseidonDBModel.InvoiceView" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

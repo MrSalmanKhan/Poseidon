@@ -1,12 +1,11 @@
-﻿<Window x:Class="Poseidon.StockItemsDialog"
+﻿<Window x:Class="Poseidon.StockItemsInvoiceDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Poseidon"
         mc:Ignorable="d"
-        Title="Select Product" Height="500" Width="450"
-        WindowStartupLocation="CenterScreen">
+        Title="StockItemsInvoiceDialog" Height="450" Width="420">
     <Window.Resources>
         <Style x:Key="placeHolder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Template">
@@ -49,7 +48,7 @@
         <TextBox Name="txtSearch" Grid.Row="0" Style="{StaticResource placeHolder}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" MinWidth="200" FontSize="14" Height="30" Tag="Search..." BorderBrush="Teal" BorderThickness="100" ToolTip="Search" TextChanged="txtSearch_TextChanged" />
 
         <DataGrid Grid.Row="1" Name="dgStockItems" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False"
-                   MinHeight="400" MinWidth="400"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
+                   MinHeight="360" MinWidth="400"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30"
                   Grid.ColumnSpan="2" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
                     VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True" DataContext="{Binding}"
                     HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
@@ -59,9 +58,9 @@
                 <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
-                <!--<DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>-->
-                    <!--<DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Strength" Binding="{Binding Strength}"></DataGridTextColumn>-->
+                <DataGridTextColumn Header="Available Quantity" Binding="{Binding Quantity}"></DataGridTextColumn>
+                <!--<DataGridTextColumn Header="Pack Size" Binding="{Binding PackSize}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Qty Pack Size" Binding="{Binding QtyPackSize}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Reorder Level" Binding="{Binding ReorderLevel}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Batch No" Binding="{Binding BatchNo}"></DataGridTextColumn>

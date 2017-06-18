@@ -152,8 +152,8 @@ namespace Poseidon.Pages
             temp.TotalCost = (Convert.ToDecimal(temp.Quantity)) * (Convert.ToDecimal(temp.QtyPackSize)) * temp.CostPerUnit;
             temp.WarehouseNo = int.Parse(cmbWarehouseNo.Text); // required
 
-            // Give warning if product already exist in stock
-            StockItem checkStockItem = db.StockItems.Where(x => x.ProductId == temp.ProductId && x.WarehouseNo == temp.WarehouseNo).Single();
+            //Give warning if product already exist in stock
+           StockItem checkStockItem = db.StockItems.Where(x => x.ProductId == temp.ProductId && x.WarehouseNo == temp.WarehouseNo).Single();
             if (checkStockItem != null && checkStockItem.Quantity > 0)
             {
                 if (MessageBox.Show(String.Format("'{0}' already exists in Stock and has Quantity '{1}'. If you continue this quantity will be added in the new quantity. Would you like to continue?", temp.ProductName, checkStockItem.Quantity), "Confirm Update", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes) == MessageBoxResult.No)

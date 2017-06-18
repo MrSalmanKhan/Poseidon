@@ -27,20 +27,20 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Content="Invoice" FontWeight="Bold" Foreground="Black" FontSize="18"/>
-                <DataGrid Grid.Row="1" Name="dgStockIn" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False"
+                <DataGrid Grid.Row="1" Name="dgInvoice" AutoGenerateColumns="False" Visibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False"
                   MinHeight="350" MinWidth="800"  AlternatingRowBackground="#FF8EBBD1"  AlternationCount="2" ColumnHeaderHeight="30" RowHeight="30" ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableRowVirtualization="True" ItemsSource="{Binding}"
                     VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True" DataContext="{Binding}"
                     HeadersVisibility="All" BorderBrush="Gainsboro" GridLinesVisibility="Horizontal"
                     HorizontalGridLinesBrush="Gainsboro" Margin="10,0,0,0" Width="945" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Visibility="Hidden" Binding="{Binding Id}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Generic Name" Binding="{Binding GenericName}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Origin" Binding="{Binding Origin}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Quantity" Binding="{Binding Qty}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Tax" Binding="{Binding Tax}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Discount" Binding="{Binding Discount}"></DataGridTextColumn>
-                        <DataGridTextColumn Header="Price" Binding="{Binding SellingPrice}"></DataGridTextColumn>
+                        <DataGridTextColumn Visibility="Hidden" Width="*" Binding="{Binding Id}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding ProductName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Generic Name" Width="*" Binding="{Binding GenericName}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Origin" Width="*" Binding="{Binding Origin}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Qty}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Tax" Width="*" Binding="{Binding Tax}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Discount" Width="*" Binding="{Binding Discount}"></DataGridTextColumn>
+                        <DataGridTextColumn Header="Price" Width="*" Binding="{Binding SellingPrice}"></DataGridTextColumn>
 
                         <DataGridTemplateColumn x:Name="btnDelete">
                             <DataGridTemplateColumn.CellTemplate>
@@ -58,7 +58,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Grid Margin="100 20 320 0" Grid.Row="1">
+            <Grid Margin="100 20 0 0" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -75,7 +75,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border Background="Transparent" CornerRadius="5" BorderThickness="2" BorderBrush="Gainsboro" Grid.ColumnSpan="4" Margin="0,-15,-10.8,0" Grid.RowSpan="7" />
+                <Border Background="Transparent" CornerRadius="5" BorderThickness="2" BorderBrush="Gainsboro" Grid.ColumnSpan="4" Grid.RowSpan="7" />
                 <Label Content="Product Name" Grid.Row="0" Grid.Column="0" Margin="10 10 10 10" />
                 <TextBox Name="txtProductName"  Grid.Row="0" Grid.Column="1" IsReadOnly="True" BorderBrush="Teal" Margin="10,10,10,10" BorderThickness="1" ToolTip="Product Name" KeyDown="btnKeyDown" />
                 <Label Content="Generic Name" Grid.Row="1" Grid.Column="0" Margin="10 10 10 10" />
@@ -86,6 +86,7 @@
                 <Label Content="Quantity"  Grid.Row="3" Grid.Column="0" Margin="10 10 10 10" />
                 <TextBox x:Name="txtQuantity" Width="250" Grid.Row="3" Grid.Column="1"  Tag="Enter Quantity" BorderBrush="Teal" Margin="10 10 10 10"  ToolTip="Enter Quantity" KeyDown="btnKeyDown"/>
                 <Label Name="lblCurrentQty" Grid.Row="0" Grid.Column="3" Foreground="Black" FontWeight="ExtraBold" />
+                <TextBox Name="txtAvailableQuantity"  Grid.Row="0" Grid.Column="3" Visibility="Hidden" BorderBrush="Teal" Margin="0,10,168,10"  ToolTip="Enter Price Per Unit" KeyDown="btnKeyDown" HorizontalAlignment="Right" Width="285" />
                 <Label Content="Price Per Unit" Grid.Row="1" Grid.Column="2" Margin="10 10 10 10" />
                 <TextBox Name="txtPricePerUnit"  Grid.Row="1" Grid.Column="3" Tag="Enter Price Per Unit" BorderBrush="Teal" Margin="0,10,168,10"  ToolTip="Enter Price Per Unit" KeyDown="btnKeyDown" HorizontalAlignment="Right" Width="285" />
                 <Label Name="lblTax" Content="Tax" Grid.Row="2" Grid.Column="2" Margin="10,10,10,10"></Label>
